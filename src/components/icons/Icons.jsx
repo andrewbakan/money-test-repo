@@ -124,8 +124,8 @@ export function IconSettings({ className, gradient = false }) {
       aria-hidden="true"
     >
       <g stroke={stroke} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 7h4l1.2-2h5.6L16 7h4v4l-2 1.2V17l-2 1.2H8L6 17v-4.8L4 11V7Z" />
         <circle cx="12" cy="12" r="2.5" />
+        <path d="M12 4.75V7.25M12 16.75V19.25M5.52 5.52 7.29 7.29M16.71 16.71 18.48 18.48M4.75 12H7.25M16.75 12H19.25M5.52 18.48 7.29 16.71M16.71 7.29 18.48 5.52" />
       </g>
     </svg>
   )

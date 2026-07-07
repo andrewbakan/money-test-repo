@@ -1232,6 +1232,7 @@ select.field__input {
 }
 
 .profile-section__svg {
+  display: block;
   width: 1rem;
   height: 1rem;
   color: var(--text-secondary);
