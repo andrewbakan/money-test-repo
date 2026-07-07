@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
+import { isNonEmpty } from '../utils/form'
 
 const ADD_OPTION = '__add_category__'
 
@@ -10,6 +11,7 @@ export default function CategorySelect({ value, onChange, id }) {
   const [showAddForm, setShowAddForm] = useState(false)
   const [newName, setNewName] = useState('')
   const [error, setError] = useState('')
+  const canAdd = isNonEmpty(newName)
 
   const handleSelectChange = (event) => {
     const next = event.target.value
@@ -26,6 +28,10 @@ export default function CategorySelect({ value, onChange, id }) {
 
   const handleAdd = () => {
     setError('')
+
+    if (!canAdd) {
+      return
+    }
 
     const result = addCategory(newName)
     if (!result.ok) {
@@ -91,7 +97,12 @@ export default function CategorySelect({ value, onChange, id }) {
             <button type="button" className="button button--secondary" onClick={handleCancel}>
               {t.cancel}
             </button>
-            <button type="button" className="button category-select__submit" onClick={handleAdd}>
+            <button
+              type="button"
+              className="button category-select__submit"
+              onClick={handleAdd}
+              disabled={!canAdd}
+            >
               {t.categoryAdd}
             </button>
           </div>

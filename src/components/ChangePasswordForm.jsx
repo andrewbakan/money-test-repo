@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocale } from '../i18n/LocaleContext'
+import {
+  isNonEmpty,
+  isValidPassword,
+  passwordsMatch,
+} from '../utils/form'
 
 function getErrorMessage(error, t) {
   switch (error.message) {
@@ -24,11 +29,19 @@ export default function ChangePasswordForm() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const canSubmit =
+    isNonEmpty(currentPassword) &&
+    isValidPassword(newPassword) &&
+    passwordsMatch(newPassword, confirmPassword)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
     setSuccess(false)
+
+    if (!canSubmit) {
+      return
+    }
 
     if (newPassword !== confirmPassword) {
       setError(t.authErrorPasswordMismatch)
@@ -96,7 +109,7 @@ export default function ChangePasswordForm() {
       {success && <p className="form__success">{t.authPasswordChanged}</p>}
 
       <div className="form__actions">
-        <button className="button" type="submit" disabled={loading}>
+        <button className="button" type="submit" disabled={loading || !canSubmit}>
           {loading ? t.authLoading : t.authChangePassword}
         </button>
       </div>

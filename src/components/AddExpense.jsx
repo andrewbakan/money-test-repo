@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
 import { isSameDay } from '../utils/date'
+import { isNonEmpty, isValidAmount, parseAmount } from '../utils/form'
 import CategorySelect from './CategorySelect'
 import ExpenseSheet from './ExpenseSheet'
 
@@ -20,14 +21,15 @@ export default function AddExpense({ expenses, onAdd, onUpdate, onDelete }) {
   )
 
   const todayTotal = todayExpenses.reduce((sum, item) => sum + item.amount, 0)
+  const canAdd = isNonEmpty(name) && isValidAmount(amount)
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const parsedAmount = parseFloat(amount.replace(',', '.'))
+    const parsedAmount = parseAmount(amount)
     const trimmedName = name.trim()
 
-    if (!trimmedName || Number.isNaN(parsedAmount) || parsedAmount <= 0) {
+    if (!canAdd) {
       return
     }
 
@@ -88,7 +90,7 @@ export default function AddExpense({ expenses, onAdd, onUpdate, onDelete }) {
             )}
 
             <div className="form__actions">
-              <button className="button" type="submit">
+              <button className="button" type="submit" disabled={!canAdd}>
                 {t.add}
               </button>
             </div>

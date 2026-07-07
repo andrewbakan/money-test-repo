@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
+import { isNonEmpty, isValidAmount, parseAmount } from '../utils/form'
 import CategorySelect from './CategorySelect'
 
 export default function ExpenseSheet({ expense, onClose, onUpdate, onDelete }) {
@@ -45,6 +46,19 @@ export default function ExpenseSheet({ expense, onClose, onUpdate, onDelete }) {
     }
   }, [expense, onClose])
 
+  const parsedAmount = parseAmount(amount)
+  const trimmedName = name.trim()
+  const isValid = isNonEmpty(trimmedName) && isValidAmount(amount) && Boolean(date)
+
+  const isDirty = expense
+    ? trimmedName !== expense.name ||
+      parsedAmount !== expense.amount ||
+      category !== expense.category ||
+      date !== expense.date
+    : false
+
+  const canSave = isValid && isDirty
+
   if (!expense) {
     return null
   }
@@ -52,10 +66,7 @@ export default function ExpenseSheet({ expense, onClose, onUpdate, onDelete }) {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const parsedAmount = parseFloat(amount.replace(',', '.'))
-    const trimmedName = name.trim()
-
-    if (!trimmedName || Number.isNaN(parsedAmount) || parsedAmount <= 0 || !date) {
+    if (!canSave) {
       return
     }
 
@@ -139,7 +150,7 @@ export default function ExpenseSheet({ expense, onClose, onUpdate, onDelete }) {
           </label>
 
           <div className="expense-sheet__actions">
-            <button className="button" type="submit">
+            <button className="button" type="submit" disabled={!canSave}>
               {t.saveChanges}
             </button>
           </div>

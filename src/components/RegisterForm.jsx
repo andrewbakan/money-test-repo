@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocale } from '../i18n/LocaleContext'
+import {
+  isNonEmpty,
+  isValidEmail,
+  isValidPassword,
+  passwordsMatch,
+} from '../utils/form'
 
 function getErrorMessage(error, t) {
   switch (error.message) {
@@ -24,10 +30,19 @@ export default function RegisterForm({ onSwitchToLogin }) {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const canSubmit =
+    isNonEmpty(name) &&
+    isValidEmail(email) &&
+    isValidPassword(password) &&
+    passwordsMatch(password, confirmPassword)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
+
+    if (!canSubmit) {
+      return
+    }
 
     if (password !== confirmPassword) {
       setError(t.authErrorPasswordMismatch)
@@ -106,7 +121,7 @@ export default function RegisterForm({ onSwitchToLogin }) {
       {error && <p className="form__error">{error}</p>}
 
       <div className="form__actions">
-        <button className="button" type="submit" disabled={loading}>
+        <button className="button" type="submit" disabled={loading || !canSubmit}>
           {loading ? t.authLoading : t.authCreateAccount}
         </button>
       </div>

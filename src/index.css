@@ -118,7 +118,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  padding: env(safe-area-inset-top) 0 var(--space-4);
+  padding: calc(env(safe-area-inset-top) + var(--header-inset-top)) 0 var(--space-4);
   background: transparent;
   transition: padding-bottom var(--duration-fast) var(--ease-standard);
 }
@@ -420,9 +420,22 @@ select.field__input {
 }
 
 .button:disabled {
-  opacity: 0.4;
+  background: var(--button-disabled-bg);
+  color: var(--button-disabled-text);
   cursor: not-allowed;
   box-shadow: none;
+  transform: none;
+  opacity: 1;
+}
+
+.button--secondary:disabled {
+  background: var(--button-disabled-bg);
+  color: var(--button-disabled-text);
+}
+
+.button--danger:disabled {
+  background: var(--button-disabled-bg);
+  color: var(--button-disabled-text);
 }
 
 .button--secondary {
@@ -438,6 +451,14 @@ select.field__input {
   min-height: auto;
   width: auto;
   padding: var(--space-2) 0;
+}
+
+.button--plain:disabled {
+  background: transparent;
+  background-image: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--button-disabled-text);
 }
 
 .button--danger {
@@ -495,6 +516,8 @@ select.field__input {
 .lang-switch__btn,
 .theme-switch__btn,
 .auth-tabs__btn {
+  position: relative;
+  z-index: 0;
   flex: 1;
   min-height: 1.75rem;
   padding: 0 var(--space-3);
@@ -507,18 +530,32 @@ select.field__input {
   font-weight: var(--weight-medium);
   cursor: pointer;
   transition:
-    background var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard),
-    color var(--duration-fast) var(--ease-standard);
+    color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
 }
 
 .segmented__btn--active,
 .lang-switch__btn--active,
 .theme-switch__btn--active,
 .auth-tabs__btn--active {
-  background: var(--segmented-thumb-bg);
   color: var(--segmented-text-active);
+  font-weight: var(--weight-semibold);
+}
+
+.segmented__btn--active::before,
+.lang-switch__btn--active::before,
+.theme-switch__btn--active::before,
+.auth-tabs__btn--active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--segmented-thumb-bg);
   box-shadow: var(--segmented-thumb-shadow);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
 }
 
 .lang-switch--wide,

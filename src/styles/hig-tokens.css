@@ -64,6 +64,8 @@
   --button-prominent-bg: var(--gradient-accent);
   --button-prominent-text: #ffffff;
   --button-secondary-bg: var(--surface-secondary);
+  --button-disabled-bg: rgba(118, 118, 128, 0.24);
+  --button-disabled-text: rgba(235, 235, 245, 0.35);
 
   /* Legacy aliases */
   --text-muted: var(--text-secondary);
@@ -90,15 +92,27 @@
   --ambient-b: rgba(59, 130, 246, 0.16);
   --ambient-c: rgba(34, 211, 238, 0.12);
 
-  /* Segmented control */
-  --segmented-track-bg: rgba(118, 118, 128, 0.24);
-  --segmented-track-border: rgba(255, 255, 255, 0.08);
-  --segmented-thumb-bg: rgba(255, 255, 255, 0.14);
+  /* Segmented control — aurora-tinted, softer than prominent buttons */
+  --segmented-track-bg: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.14) 0%,
+    rgba(118, 118, 128, 0.22) 42%,
+    rgba(59, 130, 246, 0.12) 72%,
+    rgba(34, 211, 238, 0.1) 100%
+  );
+  --segmented-track-border: rgba(168, 85, 247, 0.18);
+  --segmented-thumb-bg: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.13) 45%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
   --segmented-thumb-shadow:
     0 1px 3px rgba(0, 0, 0, 0.4),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.12);
+    0 0 0 0.5px rgba(168, 85, 247, 0.12),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.14);
   --segmented-text: var(--text-secondary);
-  --segmented-text-active: var(--text);
+  --segmented-text-active: #ffffff;
 
   color-scheme: dark;
 }
@@ -155,6 +169,8 @@
   --button-prominent-bg: var(--gradient-accent);
   --button-prominent-text: #ffffff;
   --button-secondary-bg: var(--surface-secondary);
+  --button-disabled-bg: rgba(118, 118, 128, 0.14);
+  --button-disabled-text: rgba(60, 60, 67, 0.35);
 
   --text-muted: var(--text-secondary);
   --border: var(--separator);
@@ -179,16 +195,29 @@
   --ambient-b: rgba(59, 130, 246, 0.12);
   --ambient-c: rgba(6, 182, 212, 0.1);
 
-  /* Segmented control */
-  --segmented-track-bg: rgba(118, 118, 128, 0.16);
-  --segmented-track-border: rgba(60, 60, 67, 0.22);
-  --segmented-thumb-bg: #ffffff;
+  /* Segmented control — aurora wash, muted vs buttons */
+  --segmented-track-bg: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.11) 0%,
+    rgba(118, 118, 128, 0.13) 40%,
+    rgba(59, 130, 246, 0.1) 72%,
+    rgba(6, 182, 212, 0.09) 100%
+  );
+  --segmented-track-border: rgba(99, 102, 241, 0.16);
+  --segmented-thumb-bg: linear-gradient(
+    160deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.98) 30%,
+    rgba(245, 243, 255, 0.94) 58%,
+    rgba(236, 249, 255, 0.92) 100%
+  );
   --segmented-thumb-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.08),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
-  --segmented-text: rgba(60, 60, 67, 0.6);
-  --segmented-text-active: #000000;
+    0 1px 3px rgba(99, 102, 241, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -0.5px 0 rgba(139, 92, 246, 0.07);
+  --segmented-text: rgba(60, 60, 67, 0.65);
+  --segmented-text-active: #4338ca;
 
   color-scheme: light;
 }
@@ -220,6 +249,7 @@
 
   /* Layout */
   --screen-padding-x: var(--space-4);
+  --header-inset-top: var(--space-3);
   --group-radius: 0.625rem; /* 10 */
   --touch-min: 2.75rem; /* 44 */
 

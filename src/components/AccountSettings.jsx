@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useLocale } from '../i18n/LocaleContext'
+import { isNonEmpty } from '../utils/form'
 
 export default function AccountSettings() {
   const { t } = useLocale()
@@ -14,13 +15,22 @@ export default function AccountSettings() {
     setName(user?.name ?? '')
   }, [user?.name])
 
+  const trimmedName = name.trim()
+  const isDirty = trimmedName !== (user?.name ?? '').trim()
+  const canSave = isNonEmpty(trimmedName) && isDirty
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
+
+    if (!canSave) {
+      return
+    }
+
     setLoading(true)
 
     try {
-      await updateProfile({ name })
+      await updateProfile({ name: trimmedName })
       setSaved(true)
       window.setTimeout(() => setSaved(false), 2000)
     } catch {
@@ -59,7 +69,7 @@ export default function AccountSettings() {
       {saved && <p className="form__success">{t.authProfileSaved}</p>}
 
       <div className="form__actions">
-        <button className="button" type="submit" disabled={loading}>
+        <button className="button" type="submit" disabled={loading || !canSave}>
           {loading ? t.authLoading : t.authSaveProfile}
         </button>
       </div>

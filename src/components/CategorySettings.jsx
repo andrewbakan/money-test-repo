@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
+import { isNonEmpty } from '../utils/form'
 
 export default function CategorySettings() {
   const { t } = useLocale()
@@ -8,10 +9,15 @@ export default function CategorySettings() {
   const [name, setName] = useState('')
   const [error, setError] = useState('')
   const [deletingId, setDeletingId] = useState(null)
+  const canAdd = isNonEmpty(name)
 
   const handleAdd = (event) => {
     event.preventDefault()
     setError('')
+
+    if (!canAdd) {
+      return
+    }
 
     const result = addCategory(name)
     if (!result.ok) {
@@ -46,7 +52,11 @@ export default function CategorySettings() {
           placeholder={t.categoryNamePlaceholder}
           maxLength={32}
         />
-        <button className="button category-settings__add-btn" type="submit">
+        <button
+          className="button category-settings__add-btn"
+          type="submit"
+          disabled={!canAdd}
+        >
           {t.categoryAdd}
         </button>
       </form>

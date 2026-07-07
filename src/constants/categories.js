@@ -13,7 +13,7 @@ export const SYSTEM_CATEGORY_COLORS = {
   transport: '#3b82f6',
   entertainment: '#a855f7',
   shopping: '#ec4899',
-  other: '#737373',
+  other: '#8494a7',
 }
 
 export const CUSTOM_CATEGORY_COLORS = [
