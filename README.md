@@ -1,16 +1,72 @@
-# React + Vite
+# Budget Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Мобільний веб-застосунок для обліку особистих витрат. Інтерфейс натхненний Apple Human Interface Guidelines: згруповані списки, нижня навігація, темна та світла тема.
 
-Currently, two official plugins are available:
+**Live demo:** [andrewbakan.github.io/money-test-repo](https://andrewbakan.github.io/money-test-repo/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Можливості
 
-## React Compiler
+- **Додавання витрат** — назва, сума, категорія; список витрат за сьогодні
+- **Аналітика** — підсумок за місяць, діаграма по категоріях, порівняння з попереднім місяцем
+- **Пошук** — швидкий пошук витрат за назвою (вкладка «Огляд»)
+- **Профіль** — реєстрація, зміна пароля, мова (UA/EN), тема
+- **Категорії** — системні + власні, з кольорами та переназначенням витрат
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Дані зберігаються локально в браузері (`localStorage`). Бекенду поки немає.
 
-## Expanding the Oxlint configuration
+## Стек
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- [React 19](https://react.dev/) + [Vite 8](https://vite.dev/)
+- Чистий CSS з дизайн-токенами (`src/styles/hig-tokens.css`)
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) для лінтингу
+
+## Швидкий старт
+
+```bash
+git clone https://github.com/andrewbakan/money-test-repo.git
+cd money-test-repo
+npm install
+npm run dev
+```
+
+Відкрий [http://localhost:5173](http://localhost:5173).
+
+## Скрипти
+
+| Команда | Опис |
+|---------|------|
+| `npm run dev` | Dev-сервер з HMR |
+| `npm run build` | Production-збірка в `dist/` |
+| `npm run preview` | Перегляд production-збірки |
+| `npm run lint` | Перевірка коду (Oxlint) |
+
+## Структура проєкту
+
+```
+src/
+├── main.jsx              # Точка входу, провайдери
+├── App.jsx               # Навігація між вкладками
+├── components/           # UI-компоненти
+├── contexts/             # Auth, Theme, Categories
+├── hooks/                # useExpenses
+├── services/             # Локальна авторизація
+├── utils/                # analytics, date, search, password
+├── i18n/                 # Переклади UA/EN
+└── constants/            # Системні категорії
+```
+
+## Деплой на GitHub Pages
+
+1. У `vite.config.js` вказано `base: '/money-test-repo/'` — змініть, якщо репозиторій інший.
+2. Збірка та публікація:
+
+```bash
+npm run build
+npx gh-pages -d dist
+```
+
+3. У налаштуваннях репозиторію: **Settings → Pages → Branch:** `gh-pages`, папка `/ (root)`.
+
+## Ліцензія
+
+Приватний проєкт. Використовуй на свій розсуд.

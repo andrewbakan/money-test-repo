@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import { isDemoId } from '../demo/demoExpenses'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
 import { getCategoryBreakdown, getCategoryExpenses, getMonthComparison } from '../utils/analytics'
 import { shiftMonth } from '../utils/date'
 import CategoryChart from './CategoryChart'
+import ExpenseSearch from './ExpenseSearch'
 import ExpenseSheet from './ExpenseSheet'
 import MonthComparison from './MonthComparison'
 
@@ -52,6 +52,12 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
 
   return (
     <div className="analytics">
+      <ExpenseSearch
+        expenses={expenses}
+        onUpdate={onUpdate}
+        onDelete={onDelete}
+      />
+
       <section className="section">
         <div className="group">
           <div className="month-nav">
@@ -166,61 +172,39 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
                           {t.emptyCategory}
                         </li>
                       ) : (
-                        categoryExpenses.map((expense) => {
-                          const editable = !isDemoId(expense.id)
-
-                          if (!editable) {
-                            return (
-                              <li key={expense.id} className="category-expense">
-                                <div className="category-expense__info">
-                                  <span className="category-expense__name">
-                                    {expense.name}
-                                  </span>
-                                  <span className="category-expense__date">
-                                    {formatDay(expense.date)}
-                                  </span>
-                                </div>
+                        categoryExpenses.map((expense) => (
+                          <li key={expense.id}>
+                            <button
+                              type="button"
+                              className="category-expense category-expense--interactive"
+                              onClick={() => setEditing(expense)}
+                              aria-label={t.editExpenseAria.replace(
+                                '{name}',
+                                expense.name,
+                              )}
+                            >
+                              <div className="category-expense__info">
+                                <span className="category-expense__name">
+                                  {expense.name}
+                                </span>
+                                <span className="category-expense__date">
+                                  {formatDay(expense.date)}
+                                </span>
+                              </div>
+                              <div className="category-expense__meta">
                                 <span className="category-expense__amount">
                                   {formatAmount(expense.amount)}
                                 </span>
-                              </li>
-                            )
-                          }
-
-                          return (
-                            <li key={expense.id}>
-                              <button
-                                type="button"
-                                className="category-expense category-expense--interactive"
-                                onClick={() => setEditing(expense)}
-                                aria-label={t.editExpenseAria.replace(
-                                  '{name}',
-                                  expense.name,
-                                )}
-                              >
-                                <div className="category-expense__info">
-                                  <span className="category-expense__name">
-                                    {expense.name}
-                                  </span>
-                                  <span className="category-expense__date">
-                                    {formatDay(expense.date)}
-                                  </span>
-                                </div>
-                                <div className="category-expense__meta">
-                                  <span className="category-expense__amount">
-                                    {formatAmount(expense.amount)}
-                                  </span>
-                                  <span
-                                    className="category-expense__chevron"
-                                    aria-hidden="true"
-                                  >
-                                    ›
-                                  </span>
-                                </div>
-                              </button>
-                            </li>
-                          )
-                        })
+                                <span
+                                  className="category-expense__chevron"
+                                  aria-hidden="true"
+                                >
+                                  ›
+                                </span>
+                              </div>
+                            </button>
+                          </li>
+                        ))
                       )}
                     </ul>
                   )}

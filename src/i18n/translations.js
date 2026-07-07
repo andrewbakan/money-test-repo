@@ -86,6 +86,11 @@ export const translations = {
     compareSameShort: 'Same as {month}',
     compareUpAria: '{percent}% more than {month}',
     compareDownAria: '{percent}% less than {month}',
+    search: 'Search',
+    searchPlaceholder: 'Coffee, groceries…',
+    searchClear: 'Clear search',
+    searchResultsCount: '{count} found',
+    emptySearch: 'No expenses found',
     categories: {
       food: 'Food',
       transport: 'Transport',
@@ -181,6 +186,11 @@ export const translations = {
     compareSameShort: 'Як у {month}',
     compareUpAria: 'На {percent}% більше, ніж у {month}',
     compareDownAria: 'На {percent}% менше, ніж у {month}',
+    search: 'Пошук',
+    searchPlaceholder: 'Кава, продукти…',
+    searchClear: 'Очистити пошук',
+    searchResultsCount: 'Знайдено: {count}',
+    emptySearch: 'Витрат не знайдено',
     categories: {
       food: 'Їжа',
       transport: 'Транспорт',
