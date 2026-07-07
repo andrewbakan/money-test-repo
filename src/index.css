@@ -908,6 +908,98 @@ select.field__input {
   white-space: nowrap;
 }
 
+/* ── Search ───────────────────────────────────────────── */
+
+.search-bar {
+  position: relative;
+  padding: var(--space-3) var(--space-4);
+}
+
+.search-bar__input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--space-2) 2.5rem var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--fill-tertiary);
+  color: var(--text);
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-bar__input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search-bar__input::-webkit-search-cancel-button,
+.search-bar__input::-webkit-search-decoration {
+  display: none;
+}
+
+.search-bar__clear {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--space-4) + var(--space-1));
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--fill-secondary);
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.search-bar__clear:active {
+  background: var(--surface-hover);
+}
+
+.search-results {
+  border-top: 0.5px solid var(--separator);
+}
+
+.search-results__count {
+  margin: 0;
+  padding: var(--space-2) var(--space-4) 0;
+  font-size: var(--font-footnote);
+  color: var(--text-secondary);
+}
+
+.search-results__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-4) var(--space-3);
+}
+
+.search-results__meta-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-caption);
+  color: var(--text-secondary);
+  min-width: 0;
+}
+
+.search-results__meta-line span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-results__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 /* ── Breakdown ────────────────────────────────────────── */
 
 .breakdown-item {

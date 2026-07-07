@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { isDemoId } from '../demo/demoExpenses'
 import { useCategories } from '../contexts/CategoriesContext'
 import { useLocale } from '../i18n/LocaleContext'
 import { isSameDay } from '../utils/date'
@@ -111,51 +110,31 @@ export default function AddExpense({ expenses, onAdd, onUpdate, onDelete }) {
             <p className="empty">{t.emptyToday}</p>
           ) : (
             <ul className="today-list">
-              {todayExpenses.map((item) => {
-                const editable = !isDemoId(item.id)
-
-                if (!editable) {
-                  return (
-                    <li key={item.id} className="today-item">
-                      <div className="today-item__info">
-                        <span className="today-item__name">{item.name}</span>
-                        <span className="today-item__category">
-                          {categoryLabel(item.category)}
-                        </span>
-                      </div>
+              {todayExpenses.map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    className="today-item today-item--interactive"
+                    onClick={() => setEditing(item)}
+                    aria-label={t.editExpenseAria.replace('{name}', item.name)}
+                  >
+                    <div className="today-item__info">
+                      <span className="today-item__name">{item.name}</span>
+                      <span className="today-item__category">
+                        {categoryLabel(item.category)}
+                      </span>
+                    </div>
+                    <div className="today-item__meta">
                       <span className="today-item__amount">
                         {formatAmount(item.amount)}
                       </span>
-                    </li>
-                  )
-                }
-
-                return (
-                  <li key={item.id}>
-                    <button
-                      type="button"
-                      className="today-item today-item--interactive"
-                      onClick={() => setEditing(item)}
-                      aria-label={t.editExpenseAria.replace('{name}', item.name)}
-                    >
-                      <div className="today-item__info">
-                        <span className="today-item__name">{item.name}</span>
-                        <span className="today-item__category">
-                          {categoryLabel(item.category)}
-                        </span>
-                      </div>
-                      <div className="today-item__meta">
-                        <span className="today-item__amount">
-                          {formatAmount(item.amount)}
-                        </span>
-                        <span className="today-item__chevron" aria-hidden="true">
-                          ›
-                        </span>
-                      </div>
-                    </button>
-                  </li>
-                )
-              })}
+                      <span className="today-item__chevron" aria-hidden="true">
+                        ›
+                      </span>
+                    </div>
+                  </button>
+                </li>
+              ))}
             </ul>
           )}
         </div>
