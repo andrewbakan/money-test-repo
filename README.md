@@ -75,6 +75,8 @@ npx gh-pages -d dist
 
 3. У налаштуваннях репозиторію: **Settings → Pages → Branch:** `gh-pages`, папка `/ (root)`.
 
+Після push у `main` сайт оновлюється автоматично через GitHub Actions (lint → build → deploy).
+
 ## Ліцензія
 
 Приватний проєкт. Використовуй на свій розсуд.
