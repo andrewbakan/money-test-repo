@@ -90,6 +90,16 @@
   --ambient-b: rgba(59, 130, 246, 0.16);
   --ambient-c: rgba(34, 211, 238, 0.12);
 
+  /* Segmented control */
+  --segmented-track-bg: rgba(118, 118, 128, 0.24);
+  --segmented-track-border: rgba(255, 255, 255, 0.08);
+  --segmented-thumb-bg: rgba(255, 255, 255, 0.14);
+  --segmented-thumb-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.12);
+  --segmented-text: var(--text-secondary);
+  --segmented-text-active: var(--text);
+
   color-scheme: dark;
 }
 
@@ -161,13 +171,24 @@
   --glass-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur));
   --glass-bg: rgba(255, 255, 255, 0.62);
   --glass-bg-elevated: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(60, 60, 67, 0.18);
   --glass-highlight: rgba(255, 255, 255, 0.9);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --glass-header-bg: rgba(242, 242, 247, 0.72);
   --ambient-a: rgba(139, 92, 246, 0.14);
   --ambient-b: rgba(59, 130, 246, 0.12);
   --ambient-c: rgba(6, 182, 212, 0.1);
+
+  /* Segmented control */
+  --segmented-track-bg: rgba(118, 118, 128, 0.16);
+  --segmented-track-border: rgba(60, 60, 67, 0.22);
+  --segmented-thumb-bg: #ffffff;
+  --segmented-thumb-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
+  --segmented-text: rgba(60, 60, 67, 0.6);
+  --segmented-text-active: #000000;
 
   color-scheme: light;
 }
