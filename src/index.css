@@ -145,13 +145,16 @@ body {
 
 .nav-bar {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
   min-height: var(--touch-min);
 }
 
 .nav-bar__titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 0;
   flex: 1;
 }
@@ -183,7 +186,6 @@ body {
   width: var(--touch-min);
   height: var(--touch-min);
   flex-shrink: 0;
-  margin: calc(var(--space-1) * -1);
   padding: 2px;
   border: none;
   border-radius: 50%;
