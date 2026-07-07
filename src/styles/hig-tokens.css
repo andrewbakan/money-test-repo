@@ -1,0 +1,208 @@
+/*
+ * Apple Human Interface Guidelines — design tokens
+ * Clarity · Deference · Depth
+ * 8pt grid · 44pt touch targets · grouped lists
+ */
+
+:root,
+[data-theme='dark'] {
+  /* Backgrounds */
+  --bg: #000000;
+  --bg-grouped: #000000;
+  --surface: #1c1c1e;
+  --surface-secondary: #2c2c2e;
+  --surface-hover: #3a3a3c;
+
+  /* Labels */
+  --text: #ffffff;
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-tertiary: rgba(235, 235, 245, 0.3);
+
+  /* Materials */
+  --separator: rgba(84, 84, 88, 0.65);
+  --fill-tertiary: rgba(118, 118, 128, 0.24);
+  --bar-bg: rgba(28, 28, 30, 0.82);
+
+  /* Accent — aurora gradient */
+  --tint: #5b9dff;
+  --tint-pressed: #7c3aed;
+  --gradient-stop-0: #a855f7;
+  --gradient-stop-1: #3b82f6;
+  --gradient-stop-2: #22d3ee;
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--gradient-stop-0) 0%,
+    var(--gradient-stop-1) 52%,
+    var(--gradient-stop-2) 100%
+  );
+  --gradient-accent-pressed: linear-gradient(
+    135deg,
+    #9333ea 0%,
+    #2563eb 52%,
+    #0891b2 100%
+  );
+  --gradient-glow: 0 4px 20px rgba(59, 130, 246, 0.35);
+  --gradient-ring: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.9),
+    rgba(59, 130, 246, 0.9),
+    rgba(34, 211, 238, 0.9)
+  );
+
+  /* Semantic */
+  --success: #30d158;
+  --danger: #ff453a;
+  --danger-bg: rgba(255, 69, 58, 0.12);
+
+  /* Compare chart */
+  --compare-track: rgba(118, 118, 128, 0.24);
+  --compare-up: #ff453a;
+  --compare-down: #30d158;
+  --compare-neutral: rgba(235, 235, 245, 0.3);
+
+  /* Buttons */
+  --button-prominent-bg: var(--gradient-accent);
+  --button-prominent-text: #ffffff;
+  --button-secondary-bg: var(--surface-secondary);
+
+  /* Legacy aliases */
+  --text-muted: var(--text-secondary);
+  --border: var(--separator);
+  --accent: var(--tint);
+  --accent-text: #ffffff;
+  --input-placeholder: var(--text-tertiary);
+  --input-focus: #3b82f6;
+  --hover-border: var(--separator);
+  --danger-border: rgba(255, 69, 58, 0.35);
+  --tab-bar-bg: var(--bar-bg);
+
+  /* Glass — Liquid Glass / vibrancy */
+  --glass-blur: 24px;
+  --glass-saturate: 180%;
+  --glass-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur));
+  --glass-bg: rgba(28, 28, 30, 0.65);
+  --glass-bg-elevated: rgba(44, 44, 46, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-header-bg: rgba(0, 0, 0, 0.55);
+  --ambient-a: rgba(168, 85, 247, 0.2);
+  --ambient-b: rgba(59, 130, 246, 0.16);
+  --ambient-c: rgba(34, 211, 238, 0.12);
+
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: #ffffff;
+  --bg-grouped: #f2f2f7;
+  --surface: #ffffff;
+  --surface-secondary: #f2f2f7;
+  --surface-hover: #e5e5ea;
+
+  --text: #000000;
+  --text-secondary: rgba(60, 60, 67, 0.6);
+  --text-tertiary: rgba(60, 60, 67, 0.3);
+
+  --separator: rgba(60, 60, 67, 0.29);
+  --fill-tertiary: rgba(118, 118, 128, 0.12);
+  --bar-bg: rgba(249, 249, 249, 0.82);
+
+  --tint: #6366f1;
+  --tint-pressed: #7c3aed;
+  --gradient-stop-0: #8b5cf6;
+  --gradient-stop-1: #3b82f6;
+  --gradient-stop-2: #06b6d4;
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--gradient-stop-0) 0%,
+    var(--gradient-stop-1) 50%,
+    var(--gradient-stop-2) 100%
+  );
+  --gradient-accent-pressed: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #2563eb 50%,
+    #0891b2 100%
+  );
+  --gradient-glow: 0 4px 18px rgba(99, 102, 241, 0.28);
+  --gradient-ring: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.95),
+    rgba(59, 130, 246, 0.95),
+    rgba(6, 182, 212, 0.95)
+  );
+
+  --success: #34c759;
+  --danger: #ff3b30;
+  --danger-bg: rgba(255, 59, 48, 0.08);
+
+  --compare-track: rgba(118, 118, 128, 0.12);
+  --compare-up: #ff3b30;
+  --compare-down: #34c759;
+  --compare-neutral: rgba(60, 60, 67, 0.3);
+
+  --button-prominent-bg: var(--gradient-accent);
+  --button-prominent-text: #ffffff;
+  --button-secondary-bg: var(--surface-secondary);
+
+  --text-muted: var(--text-secondary);
+  --border: var(--separator);
+  --accent: var(--tint);
+  --accent-text: #ffffff;
+  --input-placeholder: var(--text-tertiary);
+  --input-focus: #6366f1;
+  --hover-border: var(--separator);
+  --danger-border: rgba(255, 59, 48, 0.25);
+  --tab-bar-bg: var(--bar-bg);
+
+  --glass-blur: 24px;
+  --glass-saturate: 180%;
+  --glass-filter: saturate(var(--glass-saturate)) blur(var(--glass-blur));
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-header-bg: rgba(242, 242, 247, 0.72);
+  --ambient-a: rgba(139, 92, 246, 0.14);
+  --ambient-b: rgba(59, 130, 246, 0.12);
+  --ambient-c: rgba(6, 182, 212, 0.1);
+
+  color-scheme: light;
+}
+
+:root {
+  /* Typography — iOS scale */
+  --font-large-title: 2.125rem; /* 34 */
+  --font-title-2: 1.375rem; /* 22 */
+  --font-headline: 1.0625rem; /* 17 semibold */
+  --font-body: 1.0625rem; /* 17 */
+  --font-callout: 1rem; /* 16 */
+  --font-subhead: 0.9375rem; /* 15 */
+  --font-footnote: 0.8125rem; /* 13 */
+  --font-caption: 0.75rem; /* 12 */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing — 8pt grid */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.25rem; /* 20 */
+  --space-6: 1.5rem; /* 24 */
+  --space-8: 2rem; /* 32 */
+
+  /* Layout */
+  --screen-padding-x: var(--space-4);
+  --group-radius: 0.625rem; /* 10 */
+  --touch-min: 2.75rem; /* 44 */
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 150ms;
+}
