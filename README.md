@@ -38,6 +38,7 @@ npm run dev
 - Гілка `main` — актуальний код; `gh-pages` — production-збірка для GitHub Pages
 - Перед PR: `npm run lint` та `npm run build`
 - CI автоматично перевіряє lint і build на кожному PR у `main`
+- Після merge у `main` CI також публікує збірку на гілку `gh-pages`
 
 ## Скрипти
 

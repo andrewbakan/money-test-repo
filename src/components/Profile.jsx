@@ -5,23 +5,41 @@ import { useTheme } from '../contexts/ThemeContext'
 import AccountSettings from './AccountSettings'
 import CategorySettings from './CategorySettings'
 import ChangePasswordForm from './ChangePasswordForm'
+import CollapsibleSection from './CollapsibleSection'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
+import {
+  IconChart,
+  IconLock,
+  IconPerson,
+  IconSettings,
+  IconTags,
+} from './icons/Icons'
 
 export default function Profile({ expenses }) {
   const { locale, setLocale, t, formatAmount } = useLocale()
   const { theme, setTheme } = useTheme()
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, logout, loginDemo } = useAuth()
   const [authMode, setAuthMode] = useState('login')
+  const [demoLoading, setDemoLoading] = useState(false)
 
   const stats = useMemo(() => {
     const total = expenses.reduce((sum, item) => sum + item.amount, 0)
     return { count: expenses.length, total }
   }, [expenses])
 
+  const handleDemoLogin = async () => {
+    setDemoLoading(true)
+    try {
+      await loginDemo()
+    } catch {
+      setDemoLoading(false)
+    }
+  }
+
   return (
     <div className="profile">
-      {!isAuthenticated ? (
+      {!isAuthenticated && (
         <section className="section section--lead">
           <div className="group group--padded">
             <p className="profile__hint">{t.authWelcomeHint}</p>
@@ -52,39 +70,29 @@ export default function Profile({ expenses }) {
             ) : (
               <RegisterForm onSwitchToLogin={() => setAuthMode('login')} />
             )}
+
+            <div className="profile-demo">
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={handleDemoLogin}
+                disabled={demoLoading}
+              >
+                {demoLoading ? t.authLoading : t.authTryDemo}
+              </button>
+              <p className="profile-demo__hint">{t.authTryDemoHint}</p>
+            </div>
           </div>
         </section>
-      ) : (
-        <>
-          <section className="section">
-            <h2 className="section__header">{t.profileAccount}</h2>
-            <div className="group">
-              <AccountSettings />
-            </div>
-          </section>
-
-          <section className="section">
-            <h2 className="section__header">{t.profileSecurity}</h2>
-            <div className="group">
-              <ChangePasswordForm />
-            </div>
-          </section>
-
-          <button type="button" className="button button--danger" onClick={logout}>
-            {t.authLogout}
-          </button>
-        </>
       )}
 
-      <section className="section">
-        <h2 className="section__header">{t.profileCategories}</h2>
+      <CollapsibleSection title={t.profileCategories} icon={IconTags}>
         <div className="group group--padded">
           <CategorySettings />
         </div>
-      </section>
+      </CollapsibleSection>
 
-      <section className="section">
-        <h2 className="section__header">{t.profileSettings}</h2>
+      <CollapsibleSection title={t.profileSettings} icon={IconSettings}>
         <div className="group">
           <div className="profile-setting">
             <span className="profile-setting__label">{t.profileLanguage}</span>
@@ -141,10 +149,9 @@ export default function Profile({ expenses }) {
             </div>
           </div>
         </div>
-      </section>
+      </CollapsibleSection>
 
-      <section className="section">
-        <h2 className="section__header">{t.profileStats}</h2>
+      <CollapsibleSection title={t.profileStats} icon={IconChart}>
         <div className="group">
           <dl className="profile-stats">
             <div className="profile-stats__row">
@@ -157,7 +164,35 @@ export default function Profile({ expenses }) {
             </div>
           </dl>
         </div>
-      </section>
+      </CollapsibleSection>
+
+      {isAuthenticated && (
+        <>
+          <CollapsibleSection
+            title={t.profileAccount}
+            icon={IconPerson}
+            defaultExpanded={false}
+          >
+            <div className="group">
+              <AccountSettings />
+            </div>
+          </CollapsibleSection>
+
+          <CollapsibleSection
+            title={t.profileSecurity}
+            icon={IconLock}
+            defaultExpanded={false}
+          >
+            <div className="group">
+              <ChangePasswordForm />
+            </div>
+          </CollapsibleSection>
+
+          <button type="button" className="button button--danger" onClick={logout}>
+            {t.authLogout}
+          </button>
+        </>
+      )}
     </div>
   )
 }

@@ -14,6 +14,7 @@ import {
   registerUser,
   updateUserProfile,
 } from '../services/auth'
+import { seedDemoAccount } from '../services/demo'
 
 const AuthContext = createContext(null)
 
@@ -35,6 +36,11 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => {
     logoutUser()
     setUser(null)
+  }, [])
+
+  const loginDemo = useCallback(async () => {
+    await seedDemoAccount()
+    window.location.reload()
   }, [])
 
   const changePassword = useCallback(
@@ -66,11 +72,12 @@ export function AuthProvider({ children }) {
       initials: getInitials(user?.name ?? ''),
       register,
       login,
+      loginDemo,
       logout,
       changePassword,
       updateProfile,
     }),
-    [user, register, login, logout, changePassword, updateProfile],
+    [user, register, login, loginDemo, logout, changePassword, updateProfile],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
