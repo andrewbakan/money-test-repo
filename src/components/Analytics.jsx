@@ -18,6 +18,7 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
   })
   const [expandedCategory, setExpandedCategory] = useState(null)
   const [editing, setEditing] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const { total, items } = useMemo(
     () =>
@@ -42,6 +43,7 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
 
   useEffect(() => {
     setExpandedCategory(null)
+    setSearchQuery('')
   }, [selectedMonth])
 
   const toggleCategory = (category) => {
@@ -50,14 +52,10 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
     )
   }
 
+  const isSearching = searchQuery.trim().length > 0
+
   return (
     <div className="analytics">
-      <ExpenseSearch
-        expenses={expenses}
-        onUpdate={onUpdate}
-        onDelete={onDelete}
-      />
-
       <section className="section">
         <div className="group">
           <div className="month-nav">
@@ -116,6 +114,16 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
         <section className="section">
           <h2 className="section__header">{t.details}</h2>
           <div className="group">
+            <ExpenseSearch
+              expenses={expenses}
+              year={selectedMonth.year}
+              month={selectedMonth.month}
+              query={searchQuery}
+              onQueryChange={setSearchQuery}
+              onSelect={setEditing}
+            />
+
+            {!isSearching && (
             <ul className="breakdown-list">
             {items.map((item) => {
               const isExpanded = expandedCategory === item.category
@@ -212,6 +220,7 @@ export default function Analytics({ expenses, onUpdate, onDelete }) {
               )
             })}
             </ul>
+            )}
           </div>
         </section>
       )}
