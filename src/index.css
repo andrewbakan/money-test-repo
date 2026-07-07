@@ -252,33 +252,6 @@ body {
   letter-spacing: 0.02em;
 }
 
-.section__header--featured {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.section__header-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  flex-shrink: 0;
-}
-
-.section__header-icon__svg {
-  width: 100%;
-  height: 100%;
-}
-
-.section__header--featured .gradient-text {
-  font-size: var(--font-footnote);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
 .group {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-filter);
@@ -291,35 +264,6 @@ body {
 
 .group--padded {
   padding: var(--space-4);
-}
-
-.group--featured {
-  border: 1.5px solid transparent;
-  background:
-    linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
-    var(--gradient-ring) border-box;
-  box-shadow: var(--gradient-glow), var(--glass-shadow);
-}
-
-.section--featured {
-  position: relative;
-}
-
-.section--featured::before {
-  content: '';
-  position: absolute;
-  top: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100%, 20rem);
-  height: 5rem;
-  background: radial-gradient(
-    ellipse 70% 60% at 50% 0%,
-    var(--ambient-b),
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: -1;
 }
 
 .card {

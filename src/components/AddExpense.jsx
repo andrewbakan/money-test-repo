@@ -5,7 +5,6 @@ import { isSameDay } from '../utils/date'
 import { isNonEmpty, isValidAmount, parseAmount } from '../utils/form'
 import CategorySelect from './CategorySelect'
 import ExpenseSheet from './ExpenseSheet'
-import { IconPlus } from './icons/Icons'
 
 export default function AddExpense({ expenses, onAdd, onUpdate, onDelete }) {
   const { t, formatAmount } = useLocale()
@@ -48,14 +47,9 @@ export default function AddExpense({ expenses, onAdd, onUpdate, onDelete }) {
 
   return (
     <div className="add-screen">
-      <section className="section section--featured">
-        <h2 className="section__header section__header--featured">
-          <span className="section__header-icon" aria-hidden="true">
-            <IconPlus className="section__header-icon__svg" gradient />
-          </span>
-          <span className="gradient-text">{t.newExpense}</span>
-        </h2>
-        <div className="group group--featured">
+      <section className="section">
+        <h2 className="section__header">{t.newExpense}</h2>
+        <div className="group">
           <form className="form form--inset" onSubmit={handleSubmit}>
             <label className="field">
               <span className="field__label">{t.name}</span>
