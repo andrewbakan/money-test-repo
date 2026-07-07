@@ -321,11 +321,19 @@ body {
   min-height: var(--font-body);
   padding: 0;
   border: none;
+  border-radius: 0;
   background: transparent;
   color: var(--text);
   font: inherit;
   font-size: var(--font-body);
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field__input[type='search']::-webkit-search-cancel-button,
+.field__input[type='search']::-webkit-search-decoration {
+  display: none;
 }
 
 .field__input[type='number'] {
@@ -910,38 +918,28 @@ select.field__input {
 
 /* ── Search ───────────────────────────────────────────── */
 
-.search-bar {
-  position: relative;
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   padding: var(--space-3) var(--space-4);
+  border-bottom: 0.5px solid var(--separator);
 }
 
-.search-bar__input {
-  width: 100%;
-  min-height: var(--touch-min);
-  padding: var(--space-2) 2.5rem var(--space-2) var(--space-3);
-  border: none;
-  border-radius: var(--radius-md);
-  background: var(--fill-tertiary);
-  color: var(--text);
-  font: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.search-bar__input::placeholder {
+.search-field__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
   color: var(--text-tertiary);
 }
 
-.search-bar__input::-webkit-search-cancel-button,
-.search-bar__input::-webkit-search-decoration {
-  display: none;
+.search-field__input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--touch-min);
 }
 
-.search-bar__clear {
-  position: absolute;
-  top: 50%;
-  right: calc(var(--space-4) + var(--space-1));
-  transform: translateY(-50%);
+.search-field__clear {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -950,19 +948,20 @@ select.field__input {
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: var(--fill-secondary);
+  background: var(--fill-tertiary);
   color: var(--text-secondary);
   font-size: 1.125rem;
   line-height: 1;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
-.search-bar__clear:active {
+.search-field__clear:active {
   background: var(--surface-hover);
 }
 
 .search-results {
-  border-top: 0.5px solid var(--separator);
+  border-bottom: 0.5px solid var(--separator);
 }
 
 .search-results__count {
@@ -1265,9 +1264,8 @@ select.field__input {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-3);
-  border-radius: var(--group-radius);
-  background: var(--fill-tertiary);
+  padding: var(--space-3) var(--space-4);
+  border-top: 0.5px solid var(--separator);
 }
 
 .category-select__input {
