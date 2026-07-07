@@ -31,6 +31,14 @@ npm run dev
 
 Відкрий [http://localhost:5173](http://localhost:5173).
 
+**Потрібно:** Node.js 22+ (див. `.nvmrc`).
+
+## Для розробників
+
+- Гілка `main` — актуальний код; `gh-pages` — production-збірка для GitHub Pages
+- Перед PR: `npm run lint` та `npm run build`
+- CI автоматично перевіряє lint і build на кожному PR у `main`
+
 ## Скрипти
 
 | Команда | Опис |
