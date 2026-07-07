@@ -6,6 +6,7 @@
 
 :root,
 [data-theme='dark'] {
+  --deploy-rev: 2;
   /* Backgrounds */
   --bg: #000000;
   --bg-grouped: #000000;
